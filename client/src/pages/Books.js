@@ -92,12 +92,12 @@ class Books extends Component {
                 {this.state.books.map(book => (
                   <ListItem key={book.id}>
                     <a href={"/books/" + book._id}>
-                        <img className="float-left pr-3 img-fluid" src={book.volumeInfo.imageLinks.thumbnail} />
+                        <img className="float-left pr-3 img-fluid" src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://placeholder.pics/svg/128x205/DEDEDE/555555/%3F"} />
                         <h5><strong>{book.volumeInfo.title}</strong></h5>
-                    </a>
-                        <h5> by {book.volumeInfo.authors[0]}</h5>
+                        </a>
+                        <h5> by {book.volumeInfo.authors ? book.volumeInfo.authors[0] : "Unknown Author"}</h5>
                         
-                        <h5 className="d-none d-lg-block d-md-block">{book.searchInfo.textSnippet}</h5>
+                        <h5 className="d-none d-lg-block d-md-block">{book.volumeInfo.description ? book.volumeInfo.description : "No description available."}</h5>
                     
                     {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
                   </ListItem>
