@@ -36,14 +36,28 @@ class Books extends Component {
     });
   };
 
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   if(this.state.title && this.state.author) {
+  //     API.saveBook({
+  //       title : this.state.title, 
+  //       author: this.state.author, 
+  //       synopsis: this.state.sypnosis
+  //     }).then(res => this.loadBooks())
+
+  //   }
+  // }
+
   handleFormSubmit = event => {
     event.preventDefault();
-    if(this.state.title && this.state.author) {
-      API.saveBook({
-        title : this.state.title, 
-        author: this.state.author, 
-        synopsis: this.state.sypnosis
-      }).then(res => this.loadBooks())
+    if(this.state.title) {
+      console.log(process.env.NODE_ENV)
+      console.log(process.env)
+      console.log(process.env.REACT_APP_API_KEY)
+      API.searchBooks("Harry Potter")
+      .then(function(response) {
+        console.log(response)
+      })
 
     }
   }
