@@ -4,7 +4,7 @@ import React from "react";
 
 export function Input(props) {
   return (
-      <input id="book-search" type="text" className="form-control bg-secondary border-0 text-light" {...props} />
+      <input id="book-search" type="text" className="form-control border-0" {...props} />
   );
 }
 
@@ -19,7 +19,7 @@ export function TextArea(props) {
 export function FormBtn(props) {
   return (
     <div className="input-group-append">
-      <button {...props} className="btn btn-primary">
+      <button type="submit" value="Submit" {...props} className="btn btn-primary">
         {props.children}
       </button>
     </div>

@@ -13,16 +13,16 @@ class Books extends Component {
   };
 
   componentDidMount() {
-    this.loadBooks();
+    // this.loadBooks();
     document.getElementById("book-search").focus()
   }
 
   // Add code here to get all books from the database and save them to this.state.books
-  loadBooks = () => {
-      API.getBooks()
-        .then(res => this.setState({ books: res.data}))
-        .catch(err => console.log(err))
-  }
+  // loadBooks = () => {
+  //     API.getBooks()
+  //       .then(res => this.setState({ books: res.data}))
+  //       .catch(err => console.log(err))
+  // }
 
 
   handleInputChange = event => {
@@ -51,12 +51,11 @@ class Books extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if(this.state.title) {
-      console.log(process.env.NODE_ENV)
-      console.log(process.env)
-      console.log(process.env.REACT_APP_API_KEY)
-      API.searchBooks("Harry Potter")
-      .then(function(response) {
-        console.log(response)
+      API.searchBooks(this.state.title)
+      .then(response => {
+        console.log(response.data.items)
+        this.setState({ books: response.data.items})
+        
       })
 
     }
@@ -77,37 +76,33 @@ class Books extends Component {
           
             <Col size="md-6">
 
-            <div className="input-group">
-            <Input name="title" placeholder="Type something..." onChange={this.handleInputChange} />
-            <FormBtn disabled={!this.state.title ? true : false} onClick={this.handleFormSubmit}>Search Books</FormBtn>
-            </div>
+            <form className="input-group" onSubmit={this.handleFormSubmit}>
+            <Input name="title" placeholder="Type something..." onChange={e => this.handleInputChange(e)} />
+            <FormBtn disabled={!this.state.title ? true : false}>Search Books</FormBtn>
+            </form>
            
 
             </Col>
             
          </Row>
          </Jumbotron>
-          {/* <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
+          <Col size="md-12">
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
-                  <ListItem key={book._id}>
+                  <ListItem key={book.id}>
                     <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
+                        <img className="float-left pr-3 img-fluid" src={book.volumeInfo.imageLinks.thumbnail} />
+                        <h4>{book.volumeInfo.title} by {book.volumeInfo.authors[0]}</h4>
                     </a>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
                   </ListItem>
                 ))}
               </List>
             ) : (
-              <h3>No Results to Display</h3>
+              <div></div>
             )}
-          </Col> */}
+          </Col>
       </Container>
     );
   }

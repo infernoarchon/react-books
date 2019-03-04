@@ -1,9 +1,6 @@
 .list-overflow-container {
   max-height: 545px;
-  border: 1px #DDDDDD solid;
   border-radius: 4px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .list-overflow-container ul {
@@ -21,8 +18,14 @@
 }
 
 .list-overflow-container li a {
-  color: #2A878C;
+  color: #fff;
 }
+
+.list-overflow-container li a:hover {
+  text-decoration: none;
+  color: #ccc;
+}
+
 
 .list-overflow-container li:first-child {
   border-top: none;
@@ -30,4 +33,9 @@
 
 .list-overflow-container li:last-child {
   border-bottom: none;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border: 1px solid #666;
 }
