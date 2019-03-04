@@ -63,9 +63,10 @@ class Books extends Component {
           
             <Col size="md-6">
 
-            
+            <div className="input-group">
             <Input name="title" placeholder="Type something..." onChange={this.handleInputChange} />
-              <FormBtn disabled={!this.state.title ? true : false} onClick={this.handleFormSubmit}>Search Books</FormBtn>
+            <FormBtn disabled={!this.state.title ? true : false} onClick={this.handleFormSubmit}>Search Books</FormBtn>
+            </div>
            
 
             </Col>

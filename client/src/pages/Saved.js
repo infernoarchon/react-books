@@ -22,7 +22,7 @@ class Saved extends Component {
             <Col size="md-6">
 
             
-            <h1>Saved Books</h1>
+            <h2>Saved Books</h2>
            
 
             </Col>
