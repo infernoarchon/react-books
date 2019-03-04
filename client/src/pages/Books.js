@@ -93,8 +93,12 @@ class Books extends Component {
                   <ListItem key={book.id}>
                     <a href={"/books/" + book._id}>
                         <img className="float-left pr-3 img-fluid" src={book.volumeInfo.imageLinks.thumbnail} />
-                        <h4>{book.volumeInfo.title} by {book.volumeInfo.authors[0]}</h4>
+                        <h5><strong>{book.volumeInfo.title}</strong></h5>
                     </a>
+                        <h5> by {book.volumeInfo.authors[0]}</h5>
+                        
+                        <h5 className="d-none d-lg-block d-md-block">{book.searchInfo.textSnippet}</h5>
+                    
                     {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
                   </ListItem>
                 ))}
