@@ -14,6 +14,7 @@ class Books extends Component {
 
   componentDidMount() {
     this.loadBooks();
+    document.getElementById("book-search").focus()
   }
 
   // Add code here to get all books from the database and save them to this.state.books
@@ -57,19 +58,21 @@ class Books extends Component {
   render() {
     return (
       <Container fluid>
+      <Jumbotron>
         <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>What Books Should I Read?</h1>
-            </Jumbotron>
-            <form>
-              <Input name="title" placeholder="Title (required)" onChange={this.handleInputChange} />
-              <Input name="author" placeholder="Author (required)" onChange={this.handleInputChange}/>
-              <TextArea name="synopsis" placeholder="Synopsis (Optional)" onChange={this.handleInputChange} />
-              <FormBtn disabled={!this.state.title ? true : false} onClick={this.handleFormSubmit}>Submit Book</FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
+          
+            <Col size="md-6">
+
+            
+            <Input name="title" placeholder="Type something..." onChange={this.handleInputChange} />
+              <FormBtn disabled={!this.state.title ? true : false} onClick={this.handleFormSubmit}>Search Books</FormBtn>
+           
+
+            </Col>
+            
+         </Row>
+         </Jumbotron>
+          {/* <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron>
@@ -89,8 +92,7 @@ class Books extends Component {
             ) : (
               <h3>No Results to Display</h3>
             )}
-          </Col>
-        </Row>
+          </Col> */}
       </Container>
     );
   }
