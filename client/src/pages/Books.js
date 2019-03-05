@@ -38,17 +38,18 @@ class Books extends Component {
     });
   };
 
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   if(this.state.title && this.state.author) {
-  //     API.saveBook({
-  //       title : this.state.title, 
-  //       author: this.state.author, 
-  //       synopsis: this.state.sypnosis
-  //     }).then(res => this.loadBooks())
-
-  //   }
-  // }
+  handleBookSave = book => {
+    console.log(book)
+      API.saveBook({
+        title : book.volumeInfo.title,
+        authors: book.volumeInfo.authors,
+        description: book.volumeInfo.description ? book.volumeInfo.description.slice(0,300) + "..." : "No description available",
+        image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://placeholder.pics/svg/128x205/DEDEDE/555555/%3F",
+        link: book.volumeInfo.infoLink
+      }).then(
+        console.log("book saved")
+      )
+  }
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -62,12 +63,6 @@ class Books extends Component {
 
     }
   }
-
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
 
 
   render() {
@@ -93,14 +88,14 @@ class Books extends Component {
               <List>
                 {this.state.books.map(book => (
                   <ListItem key={book.id + book.etag}>
-                    <a href={"/books/" + book._id}>
+                    <a href={book.volumeInfo.infoLink} target="_blank">
                         <img className="float-left pr-3 img-fluid" src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://placeholder.pics/svg/128x205/DEDEDE/555555/%3F"} />
-                        <h5><strong>{book.volumeInfo.title}</strong></h5>
+                        <h5 style={{display: "inline"}}><strong>{book.volumeInfo.title}</strong></h5>
                         </a>
-                        <h5> by {book.volumeInfo.authors ? book.volumeInfo.authors[0] : "Unknown Author"}</h5>
+                        <h6> by {book.volumeInfo.authors ? book.volumeInfo.authors : "Unknown Author"}</h6>
                         
-                        <h5 className="d-none d-lg-block d-md-block">{book.volumeInfo.description ? book.volumeInfo.description.slice(0,300) + "..." : "No description available."}</h5>
-                        <AddBtn />
+                        <p className="d-none d-lg-block d-md-block">{book.volumeInfo.description ? book.volumeInfo.description.slice(0,300) + "..." : "No description available."}</p>
+                        <AddBtn onClick={() => this.handleBookSave(book)} />
                     {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
                   </ListItem>
                 ))}

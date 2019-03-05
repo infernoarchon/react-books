@@ -11,7 +11,22 @@ class Saved extends Component {
   state = {
     books: []
   };
+  componentDidMount() {
+    this.loadBooks();
+  }
 
+  // Add code here to get all books from the database and save them to this.state.books
+  loadBooks = () => {
+      API.getBooks()
+        .then(res => this.setState({ books: res.data}))
+        .catch(err => console.log(err))
+  }
+
+  deleteBook = id => {
+    API.deleteBook(id)
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -22,34 +37,34 @@ class Saved extends Component {
             <Col size="md-6">
 
             
-            <h4>Saved Books</h4>
+            <h3>Favorite Books</h3>
            
 
             </Col>
             
          </Row>
          </Jumbotron>
-          {/* <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
+         <Col size="md-12">
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
                   <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </a>
+                    <a href={book.link} target="_blank">
+                        <img className="float-left pr-3 img-fluid" src={book.image} />
+                        <h5 style={{display: "inline"}}><strong>{book.title}</strong></h5>
+                        </a>
+                        <h6> by {book.authors}</h6>
+                        
+                        <p className="d-none d-lg-block d-md-block">{book.description}</p>
+                        {/* <AddBtn onClick={() => this.handleBookSave(book)} /> */}
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
                   </ListItem>
                 ))}
               </List>
             ) : (
-              <h3>No Results to Display</h3>
+              <div></div>
             )}
-          </Col> */}
+          </Col>
       </Container>
     );
   }

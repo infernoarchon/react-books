@@ -4,7 +4,7 @@ import React from "react";
 
 export function Input(props) {
   return (
-      <input id="book-search" type="text" className="form-control border-0" {...props} />
+      <input id="book-search" type="text" className="form-control bg-white pl-3" {...props} />
   );
 }
 
