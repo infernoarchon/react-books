@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import DeleteBtn from "../components/DeleteBtn";
+import AddBtn from "../components/AddBtn";
+
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
@@ -90,15 +92,15 @@ class Books extends Component {
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
-                  <ListItem key={book.id}>
+                  <ListItem key={book.id + book.etag}>
                     <a href={"/books/" + book._id}>
                         <img className="float-left pr-3 img-fluid" src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://placeholder.pics/svg/128x205/DEDEDE/555555/%3F"} />
                         <h5><strong>{book.volumeInfo.title}</strong></h5>
                         </a>
                         <h5> by {book.volumeInfo.authors ? book.volumeInfo.authors[0] : "Unknown Author"}</h5>
                         
-                        <h5 className="d-none d-lg-block d-md-block">{book.volumeInfo.description ? book.volumeInfo.description : "No description available."}</h5>
-                    
+                        <h5 className="d-none d-lg-block d-md-block">{book.volumeInfo.description ? book.volumeInfo.description.slice(0,300) + "..." : "No description available."}</h5>
+                        <AddBtn />
                     {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
                   </ListItem>
                 ))}
