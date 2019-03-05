@@ -2,7 +2,7 @@
 
 A React-based Book App that queries the Google Books API and allows users to save books to their favorites.
 
-# Setup
+## Setup
 1. `git clone`
 2. `npm install` in root directory
 3. Sign up for a Google Books API key:
